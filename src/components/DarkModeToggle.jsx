@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const DarkModeToggle = () => {
-  return (
-    <div>
-      <h1>Dark Mode</h1>
-    </div>
-  )
-}
+  return <button> Dark/Light Mode</button>;
+};
 
-export default DarkModeToggle
+export default DarkModeToggle;
