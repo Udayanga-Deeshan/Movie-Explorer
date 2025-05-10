@@ -1,21 +1,49 @@
 import React from 'react';
 import { useMovies } from '../context/MovieContext';
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+} from '@mui/material';
 
 const MovieCard = ({ movie }) => {
   const { setSelectedMovie } = useMovies();
+
   const imageUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
     : 'https://via.placeholder.com/300x450';
 
   return (
-    <div
-      className="cursor-pointer hover:scale-105 transition transform"
+    <Card
+      sx={{
+        borderRadius: 2,
+        transition: 'transform 0.3s ease',
+        '&:hover': { transform: 'scale(1.05)' },
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
       onClick={() => setSelectedMovie(movie)}
     >
-      <img src={imageUrl} alt={movie.title} className="rounded" />
-      <h3 className="mt-2 font-semibold text-sm">{movie.title}</h3>
-      <p className="text-xs text-gray-600 dark:text-gray-400">{movie.release_date?.split('-')[0]}</p>
-    </div>
+      <CardActionArea sx={{ flexGrow: 1 }}>
+        <CardMedia
+          component="img"
+          height="450"
+          image={imageUrl}
+          alt={movie.title}
+        />
+        <CardContent>
+          <Typography variant="subtitle1" fontWeight="600" noWrap>
+            {movie.title}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {movie.release_date?.split('-')[0]}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
